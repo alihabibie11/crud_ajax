@@ -1,30 +1,35 @@
 $(document).ready(function() {
+    //jalankan func ini untuk meload data2 dari db (php).
     bacaData();
 
+    //tombol untuk ke input add, edit, delete disini. terkait db or php
     $('.btn-tambah').click(function() {
         tambahData();
     })
-
     $('.btn-ubah').click(function() {
         ubahData();
     })
-
     $('.btn-batal').click(function() {
         resetForm();
         bacaData();
     })
 
+    //semua data table dan terkait db ada di sini, dll termasuk optionnya.
     function bacaData() {
+        //select which elemen
         $('.targetData').html('');
+        //show and hide button when this func loaded
         $('.btn-tambah').show();
         $('.btn-ubah').hide();
         $('.btn-batal').hide();
+        //script ajax untuk menampilkan data
         $.ajax({
             type: 'GET',
             url: 'php/getData.php',
             dataType: 'JSON',
             success: function (response) {
                 var i;
+                //declare var data untuk dikirim ke html
                 var data = '';
 
                 for(i = 0; i < response.length; i++) {
@@ -42,12 +47,22 @@ $(document).ready(function() {
                     </tr>
                     `
                 }
-
+                //select target, send data to html.
                 $('.targetData').append(data);
-                //ketika diklik akan menampilkan atribut id
+
+                //ketika diklik akan menampilkan atribut id dari parent
                 // alert($(this).attr('id'))
                 $('.btn-edit').click(function () {
                     getSingleData($(this).attr('id'))
+                })
+
+                $('.btn-delete').click(function() {
+                    var acc = confirm('Apakah anda yakin ingin menghapus data ini?');
+
+                    if (acc) {
+                        deleteData($(this).attr('id'));
+                    }
+
                 })
             }
         })
@@ -69,6 +84,25 @@ $(document).ready(function() {
                 $('.btn-tambah').hide();
                 $('.btn-ubah').show();
                 $('.btn-batal').show();
+            }
+        })
+    }
+
+    function deleteData(x) {
+
+        $.ajax({
+            type : 'POST',
+            url : 'php/deleteData.php',
+            data : 'id='+x,
+            dataType : 'JSON',
+            success : function (response) {
+                if (response.status == '1') {
+                    alert(response.msg);
+                    bacaData();
+                } else {
+                    alert(response.msg);
+                    bacaData();
+                }
             }
         })
     }
@@ -131,3 +165,5 @@ $(document).ready(function() {
     }
 
 });
+
+//documen ready, function, selecttor, set value, select dan ambil value, send to php untuk proses dgn database
