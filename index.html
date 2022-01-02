@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <title>CRUD AJAX</title>
+</head>
+
+<body>
+    <h1>CRUD menggunakan AJAX</h1>
+    <hr>
+    <br>
+    <table border="1" style="width: 70%">
+        <thead>
+            <tr>
+                <td>No</td>
+                <td>Nama Barang</td>
+                <td>Harga Barang</td>
+                <td>Stok</td>
+                <td>Option</td>
+            </tr>
+        </thead>
+        <tbody class="targetData">
+        </tbody>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <table>
+        <tr>
+            <td>ID Barang</td>
+            <td><input type="text" class="txt_id" disabled></td>
+        </tr>
+        <tr>
+            <td>Nama Barang</td>
+            <td><input type="text" class="txt_nama_barang"></td>
+        </tr>
+        <tr>
+            <td>Harga Barang</td>
+            <td><input type="text" class="txt_harga_barang"></td>
+        </tr>
+        <tr>
+            <td>Stok</td>
+            <td><input type="text" class="txt_stok"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button class="btn-tambah">Tambah</button>
+                <button class="btn-ubah" style="display: none;">Simpan</button>
+                <button class="btn-batal" style="display: none;">Batal</button></td>
+        </tr>
+    </table>
+
+    <script type="text/javascript" src="js/jquery.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+
+</html>
